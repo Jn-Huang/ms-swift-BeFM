@@ -1,0 +1,84 @@
+[project]
+name = "ms-swift-befm"
+version = "0.1.0"
+description = "MS-SWIFT: Scalable lightWeight Infrastructure for Fine-Tuning"
+readme = "README.md"
+requires-python = ">=3.10,<3.12"
+dependencies = [
+    "accelerate",
+    "addict",
+    "aiohttp",
+    "attrdict",
+    "binpacking",
+    "charset_normalizer",
+    "cpm_kernels",
+    "dacite",
+    "datasets>=3.0,<4.0",
+    "einops",
+    "fastapi",
+    "gradio>=3.40.0,<5.33",
+    "importlib_metadata",
+    "jieba",
+    "json_repair",
+    "matplotlib",
+    "modelscope>=1.23",
+    "nltk",
+    "numpy",
+    "omegaconf",
+    "openai",
+    "oss2",
+    "pandas",
+    "peft>=0.11,<0.19",
+    "pillow",
+    "PyYAML>=5.4",
+    "requests",
+    "rouge",
+    "safetensors",
+    "scipy",
+    "sentencepiece",
+    "simplejson>=3.3.0",
+    "sortedcontainers>=1.5.9",
+    "tensorboard",
+    "tiktoken",
+    "tqdm",
+    "transformers>=4.33,<4.58",
+    "transformers_stream_generator",
+    "trl>=0.15,<0.25",
+    "uvicorn",
+    "zstandard",
+    "torch",
+    "wandb",
+    "msgspec>=0.20.0",
+    "deepspeed>=0.18.2",
+    "vllm>=0.5.1",
+]
+
+[project.optional-dependencies]
+eval = [
+    "evalscope>=1.0.0",
+    "evalscope[opencompass]",
+    "evalscope[vlmeval]",
+]
+megatron = [
+    "pybind11",
+    "megatron_core @ git+https://github.com/NVIDIA/Megatron-LM.git@core_r0.14.0",
+]
+
+[project.scripts]
+swift = "swift.cli.main:cli_main"
+megatron = "swift.cli._megatron.main:cli_main"
+
+[tool.uv]
+
+[tool.uv.sources]
+ms-swift-befm = { workspace = true }
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["swift"]
